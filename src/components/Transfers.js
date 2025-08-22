@@ -62,7 +62,7 @@ const Transfers = () => {
     fetchBases()
     fetchTransfers()
     fetchStats()
-  }, [filters, pagination.current])
+  }, [filters, pagination.current, fetchTransfers])
 
   const fetchBases = async () => {
     try {

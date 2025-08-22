@@ -50,7 +50,7 @@ const Purchases = () => {
   useEffect(() => {
     fetchPurchases()
     fetchStats()
-  }, [filters, pagination.current])
+  }, [filters, pagination.current, fetchPurchases])
 
   const fetchPurchases = async () => {
     try {

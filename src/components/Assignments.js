@@ -11,7 +11,6 @@ const Assignments = () => {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState("")
   const [showModal, setShowModal] = useState(false)
-  const [modalType, setModalType] = useState("create")
   const [selectedAssignment, setSelectedAssignment] = useState(null)
   const [showStatusModal, setShowStatusModal] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
@@ -54,7 +53,7 @@ const Assignments = () => {
   useEffect(() => {
     fetchAssignments()
     fetchStats()
-  }, [filters])
+  }, [filters, fetchAssignments])
 
   const fetchAssignments = async () => {
     try {
@@ -189,24 +188,6 @@ const Assignments = () => {
     setShowStatusModal(true)
   }
 
-  const getStatusBadge = (status) => {
-    const statusClasses = {
-      active: "status-badge status-active",
-      returned: "status-badge status-returned",
-      expended: "status-badge status-expended",
-      partial_return: "status-badge status-partial",
-    }
-
-    const statusLabels = {
-      active: "Active",
-      returned: "Returned",
-      expended: "Expended",
-      partial_return: "Partial Return",
-    }
-
-    return <span className={statusClasses[status]}>{statusLabels[status]}</span>
-  }
-
   const canManageAssignments = user?.role === "admin" || user?.role === "base_commander"
 
   // Enhanced refresh function
@@ -238,7 +219,6 @@ const Assignments = () => {
               <button
                 className="btn btn-primary"
                 onClick={() => {
-                  setModalType("create")
                   setShowModal(true)
                 }}
               >
